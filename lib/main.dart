@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "Navigation the New Normal",
                 ),
                 Container(
+                  height: 76,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/cover-image.jpg"))),
