@@ -42,44 +42,185 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff5f6f8),
+      backgroundColor: const Color(0xfff5f6f8),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Column(
+      body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: Column(
-              children: [
-                const Text(
-                  "Navigation the New Normal",
-                ),
-                Container(
-                  height: 76,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/cover-image.jpg"))),
-                )
-              ],
-            ),
-          )
-        ],
+        children: <Widget>[VideoTemplate(), CommentBox()],
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 50,
         width: double.infinity,
-        color: Colors.blue,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.home),
+            _buildNavSelectItem(Icons.home),
             Icon(Icons.web),
             Icon(Icons.chat),
             Icon(Icons.storage),
           ],
         ),
+      ),
+    );
+  }
+
+  Column _buildNavSelectItem(IconData icon) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          color: Colors.deepOrange,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Container(
+          height: 8,
+          width: 40,
+          decoration: BoxDecoration(
+              color: Colors.deepOrange, borderRadius: BorderRadius.circular(3)),
+        )
+      ],
+    );
+  }
+}
+
+class CommentBox extends StatelessWidget {
+  const CommentBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Row(
+        children: [
+          const Flexible(
+              child: SizedBox(
+            height: 45,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Add a comment...",
+                hintStyle: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
+                ),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
+              ),
+            ),
+          )),
+          const SizedBox(width: 14),
+          Material(
+            type: MaterialType.transparency,
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Colors.deepOrange,
+              ),
+              child: InkWell(
+                //borderRadius: BorderRadius.circular(100.0),
+                onTap: () {},
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Icon(
+                    Icons.send,
+                    size: 25.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class VideoTemplate extends StatelessWidget {
+  const VideoTemplate({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Navigation the New Normal",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: const EdgeInsets.all(40),
+            height: 135,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black,
+              image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage("assets/cover-image.jpg"),
+              ),
+            ),
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.play_arrow,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 11),
+          SizedBox(
+            width: 150,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "by u/internetPositiff",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  height: 4,
+                  width: 4,
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.grey),
+                ),
+                const Text(
+                  "16h",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
